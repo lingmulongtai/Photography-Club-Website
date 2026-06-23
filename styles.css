@@ -1262,6 +1262,12 @@ h2 {
 }
 
 @media (max-width: 640px) {
+  .viewfinder-overlay span:nth-child(3),
+  .viewfinder-overlay span:nth-child(4),
+  .viewfinder-overlay em {
+    display: none;
+  }
+
   .opening-frame {
     height: 340px;
   }
