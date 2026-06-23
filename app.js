@@ -181,6 +181,7 @@
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
     renderer.outputEncoding = THREE.sRGBEncoding;
+    window.KUAS_WEBGL_CONTEXT = renderer.getContext();
     viewport.classList.add("is-webgl");
 
     const rig = new THREE.Group();
