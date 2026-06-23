@@ -15,6 +15,9 @@
   const lightboxExif = document.querySelector("#lightbox-exif");
   const threeCanvas = document.querySelector("#three-camera");
 
+  opening?.addEventListener("animationend", () => opening.remove(), { once: true });
+  window.setTimeout(() => opening?.remove(), 4600);
+
   const shutter = () => {
     flash.classList.remove("is-active");
     window.requestAnimationFrame(() => flash.classList.add("is-active"));
@@ -160,6 +163,28 @@
   }
 
   function initAnchorScroll() {
+    let scrollAnimation = 0;
+    const animateTo = (targetTop) => {
+      window.cancelAnimationFrame(scrollAnimation);
+      const startTop = window.scrollY;
+      const distance = targetTop - startTop;
+      const duration = 760;
+      const startedAt = performance.now();
+      const ease = (t) => 1 - Math.pow(1 - t, 3);
+
+      const step = (now) => {
+        const progress = Math.min(1, (now - startedAt) / duration);
+        const nextTop = startTop + distance * ease(progress);
+        document.documentElement.scrollTop = nextTop;
+        document.body.scrollTop = nextTop;
+        if (progress < 1) {
+          scrollAnimation = window.requestAnimationFrame(step);
+        }
+      };
+
+      scrollAnimation = window.requestAnimationFrame(step);
+    };
+
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", (event) => {
         const target = document.querySelector(anchor.getAttribute("href"));
@@ -168,8 +193,7 @@
         }
         event.preventDefault();
         const top = target.getBoundingClientRect().top + window.scrollY;
-        document.documentElement.scrollTop = top;
-        document.body.scrollTop = top;
+        animateTo(top);
         history.replaceState(null, "", anchor.getAttribute("href"));
       });
     });
@@ -415,13 +439,12 @@
   renderForms();
   renderFilters();
   renderGallery();
-  initThreeCameraScene();
   initReveal();
   initPointer();
   initLightbox();
   initHeader();
   initAnchorScroll();
+  initThreeCameraScene();
 
   window.setTimeout(shutter, 1650);
-  window.setTimeout(() => opening?.remove(), 4600);
 })();

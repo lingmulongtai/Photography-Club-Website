@@ -391,10 +391,12 @@ img {
   display: flex;
   align-items: flex-end;
   isolation: isolate;
+  contain: layout paint;
   overflow: hidden;
   min-height: 112vh;
   padding-bottom: 13vh;
   background: #010204;
+  z-index: 1;
 }
 
 .hero::before {
@@ -512,6 +514,7 @@ h2 {
   min-height: 100%;
   display: block;
   perspective: none;
+  pointer-events: none;
 }
 
 .webgl-scene,
@@ -525,8 +528,20 @@ h2 {
 
 .webgl-scene {
   display: block;
+  pointer-events: none;
   opacity: 0;
   transition: opacity 900ms ease 300ms;
+}
+
+.links-section,
+.about-section,
+.activities-section,
+.gallery-section,
+.join-section,
+.forms-section,
+.footer {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-visual.is-webgl .webgl-scene {
