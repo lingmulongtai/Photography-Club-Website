@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="KUAS Photography Club official link hub and interactive landing page."
+    />
+    <title>KUAS Photography Club | Enter the Viewfinder</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="shutter-flash" aria-hidden="true"></div>
+    <div class="cursor-light" aria-hidden="true"></div>
+
+    <section class="opening" aria-label="Opening viewfinder animation">
+      <div class="aperture" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="opening-frame">
+        <span class="corner corner-tl"></span>
+        <span class="corner corner-tr"></span>
+        <span class="corner corner-bl"></span>
+        <span class="corner corner-br"></span>
+        <div class="focus-grid" aria-hidden="true"></div>
+        <p>Focus on the moment.</p>
+        <p>Capture the campus.</p>
+        <strong>KUAS Photography Club</strong>
+      </div>
+    </section>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="KUAS Photography Club home">
+        <span class="brand-mark"></span>
+        <span>KUAS Photo</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#links">Links</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#join">Join</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Enter the Viewfinder</p>
+          <h1 id="hero-title">KUAS Photography Club</h1>
+          <p class="hero-tagline">Capture. Create. Connect.</p>
+          <p class="hero-description">
+            We are a student photography club at Kyoto University of Advanced Science.
+            日常、キャンパス、街、旅、ポートレート、イベント。
+            それぞれの視点で、今しかない瞬間を残しています。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#join">Join the Club</a>
+            <a class="button" href="#gallery">View Gallery</a>
+            <a class="button button-ghost" href="#links">Event Forms</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Animated camera lens illustration">
+          <div class="camera-hud hud-top">REC 00:00:08 / ISO 400 / F1.8</div>
+          <div class="camera-body">
+            <div class="camera-top"></div>
+            <div class="camera-lens">
+              <span class="lens-ring ring-one"></span>
+              <span class="lens-ring ring-two"></span>
+              <span class="lens-glass"></span>
+              <span class="lens-reflection"></span>
+            </div>
+            <div class="camera-viewfinder"></div>
+            <div class="camera-grip"></div>
+          </div>
+          <div class="camera-hud hud-bottom">AF-C / CAMPUS / 1-250</div>
+        </div>
+
+        <div class="floating-photo photo-a" data-depth="18"></div>
+        <div class="floating-photo photo-b" data-depth="-12"></div>
+        <div class="floating-photo photo-c" data-depth="9"></div>
+      </section>
+
+      <section id="links" class="section links-section" aria-labelledby="links-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Link Hub</p>
+          <h2 id="links-title">必要なリンクを、ここから。</h2>
+          <p>
+            InstagramのプロフィールやQRコードから来た人が、入部・イベント・SNSへすぐ移動できる中心ハブです。
+          </p>
+        </div>
+        <div class="quick-links reveal" id="quick-links"></div>
+      </section>
+
+      <section id="about" class="section about-section" aria-labelledby="about-title">
+        <div class="about-panel reveal">
+          <p class="eyebrow">About</p>
+          <h2 id="about-title">A creative community for visual storytelling.</h2>
+          <p>
+            KUAS Photography Clubは、写真・カメラ・デザイン・表現が好きな学生のためのクラブです。
+            高いカメラや専門的な知識がなくても大丈夫。スマホでも、一眼でも、初心者でも歓迎します。
+          </p>
+          <p>
+            Photo walks, campus shooting, exhibitions, university events, editing sessions.
+            All you need is curiosity and your own way of seeing the world.
+          </p>
+        </div>
+        <div class="about-metrics reveal" aria-label="Club highlights">
+          <div><strong>01</strong><span>初心者歓迎</span></div>
+          <div><strong>02</strong><span>スマホでもOK</span></div>
+          <div><strong>03</strong><span>International friendly</span></div>
+          <div><strong>04</strong><span>Design × Engineering</span></div>
+        </div>
+      </section>
+
+      <section class="section activities-section" aria-labelledby="activities-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Activities</p>
+          <h2 id="activities-title">Frames from campus life.</h2>
+        </div>
+        <div class="activity-track reveal" id="activity-track" tabindex="0" aria-label="Featured activities"></div>
+      </section>
+
+      <section id="gallery" class="section gallery-section" aria-labelledby="gallery-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Interactive Gallery</p>
+          <h2 id="gallery-title">Scroll, filter, open the frame.</h2>
+          <p>仮画像のギャラリーです。作品が集まり次第、`data.js` のURLを差し替えられます。</p>
+        </div>
+        <div class="filter-bar reveal" id="filter-bar" aria-label="Gallery filters"></div>
+        <div class="gallery-grid reveal" id="gallery-grid"></div>
+      </section>
+
+      <section id="join" class="section join-section" aria-labelledby="join-title">
+        <div class="join-copy reveal">
+          <p class="eyebrow">Recruitment</p>
+          <h2 id="join-title">Join KUAS Photography Club</h2>
+          <p class="join-lead">
+            No camera? No problem. No experience? Even better.
+          </p>
+          <p>
+            写真を撮るのが好きな人、カメラに興味がある人、デザインや編集をやってみたい人、
+            大学生活で何か新しいことを始めたい人。ぜひ一緒に活動しましょう。
+          </p>
+          <a class="button button-primary large" href="https://forms.gle/xxxx" target="_blank" rel="noreferrer">
+            Open Join Form
+          </a>
+        </div>
+        <div class="film-strip reveal" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </section>
+
+      <section class="section forms-section" aria-labelledby="forms-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Forms & Important Links</p>
+          <h2 id="forms-title">Current openings.</h2>
+        </div>
+        <div class="forms-list reveal" id="forms-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <strong>KUAS Photography Club</strong>
+        <p>Kyoto University of Advanced Science</p>
+      </div>
+      <p>Capture the moment. Create the memory.</p>
+      <p>Made by KUAS Photography Club.</p>
+    </footer>
+
+    <dialog class="lightbox" id="lightbox" aria-label="Gallery image preview">
+      <button class="lightbox-close" type="button" aria-label="Close preview">×</button>
+      <img alt="" id="lightbox-image" />
+      <div class="lightbox-meta">
+        <strong id="lightbox-title"></strong>
+        <span id="lightbox-exif"></span>
+      </div>
+    </dialog>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
