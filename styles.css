@@ -178,6 +178,7 @@ img {
   display: grid;
   place-items: center;
   overflow: hidden;
+  pointer-events: none;
   background: #000;
   animation: introExit 4200ms ease forwards;
 }

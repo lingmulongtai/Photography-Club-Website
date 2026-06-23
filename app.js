@@ -3,6 +3,7 @@
   const root = document.documentElement;
   const flash = document.querySelector(".shutter-flash");
   const cursorLight = document.querySelector(".cursor-light");
+  const opening = document.querySelector(".opening");
   const quickLinks = document.querySelector("#quick-links");
   const activityTrack = document.querySelector("#activity-track");
   const formsList = document.querySelector("#forms-list");
@@ -405,4 +406,5 @@
   initHeader();
 
   window.setTimeout(shutter, 1650);
+  window.setTimeout(() => opening?.remove(), 4600);
 })();
