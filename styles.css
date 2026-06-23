@@ -745,9 +745,13 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.82)),
     linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
     radial-gradient(circle at 86% 18%, rgba(103, 216, 255, 0.12), transparent 34%),
+    var(--link-image),
     var(--panel);
+  background-size: auto, auto, auto, cover, auto;
+  background-position: center;
   transform-style: preserve-3d;
   transition: transform 260ms ease, border-color 220ms ease, background 220ms ease;
 }
@@ -759,6 +763,16 @@ h2 {
   background: linear-gradient(115deg, transparent 0 35%, rgba(255, 255, 255, 0.18) 48%, transparent 62%);
   transform: translateX(-120%);
   transition: transform 520ms ease;
+}
+
+.link-card::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(103, 216, 255, 0.3);
+  border-radius: 999px;
+  opacity: 0.7;
+  transform: translateZ(20px);
 }
 
 .link-card:hover {
@@ -775,8 +789,12 @@ h2 {
   grid-row: span 2;
   border-color: rgba(255, 157, 67, 0.56);
   background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.76)),
     linear-gradient(145deg, rgba(255, 157, 67, 0.24), transparent 45%),
+    var(--link-image),
     var(--panel-strong);
+  background-size: auto, auto, cover, auto;
+  background-position: center;
 }
 
 .link-tag,
@@ -791,14 +809,23 @@ h2 {
   font-size: 0.72rem;
 }
 
+.link-tag {
+  position: relative;
+  z-index: 1;
+  background: rgba(3, 4, 6, 0.56);
+}
+
 .link-card strong {
   position: relative;
+  z-index: 1;
   font-size: 1.35rem;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, 0.9);
 }
 
 .link-card span:not(.link-tag),
 .link-card em {
   position: relative;
+  z-index: 1;
   color: var(--muted);
   line-height: 1.6;
 }
@@ -806,6 +833,7 @@ h2 {
 .link-card em {
   font-size: 0.78rem;
   font-style: normal;
+  color: rgba(246, 247, 244, 0.78);
 }
 
 .about-section {

@@ -6,7 +6,8 @@ window.KUAS_SITE_DATA = {
       url: "https://forms.gle/xxxx",
       tag: "OPEN",
       priority: true,
-      type: "form"
+      type: "form",
+      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
     },
     {
       title: "Photo Walk Entry",
@@ -14,7 +15,8 @@ window.KUAS_SITE_DATA = {
       url: "https://forms.gle/xxxx",
       tag: "EVENT",
       priority: true,
-      type: "form"
+      type: "form",
+      image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80"
     },
     {
       title: "Instagram",
@@ -22,7 +24,8 @@ window.KUAS_SITE_DATA = {
       url: "https://www.instagram.com/",
       tag: "SNS",
       priority: false,
-      type: "social"
+      type: "social",
+      image: "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format&fit=crop&w=900&q=80"
     },
     {
       title: "New Student Welcome",
@@ -30,7 +33,8 @@ window.KUAS_SITE_DATA = {
       url: "https://forms.gle/xxxx",
       tag: "LIVE",
       priority: false,
-      type: "form"
+      type: "form",
+      image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80"
     },
     {
       title: "Photo Archive",
@@ -38,7 +42,8 @@ window.KUAS_SITE_DATA = {
       url: "https://drive.google.com/",
       tag: "MEMBER",
       priority: false,
-      type: "archive"
+      type: "archive",
+      image: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=900&q=80"
     },
     {
       title: "Contact",
@@ -46,7 +51,8 @@ window.KUAS_SITE_DATA = {
       url: "mailto:kuas.photo@example.com",
       tag: "MAIL",
       priority: false,
-      type: "contact"
+      type: "contact",
+      image: "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?auto=format&fit=crop&w=900&q=80"
     }
   ],
   activities: [

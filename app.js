@@ -23,7 +23,7 @@
     quickLinks.innerHTML = data.links
       .map(
         (link) => `
-          <a class="link-card ${link.priority ? "priority" : ""}" href="${link.url}" target="_blank" rel="noreferrer">
+          <a class="link-card ${link.priority ? "priority" : ""}" style="--link-image: url('${link.image}')" href="${link.url}" target="_blank" rel="noreferrer">
             <span class="link-tag">${link.tag}</span>
             <strong>${link.title}</strong>
             <span>${link.description}</span>
