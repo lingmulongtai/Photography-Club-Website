@@ -15,6 +15,11 @@
     <div class="grain" aria-hidden="true"></div>
     <div class="shutter-flash" aria-hidden="true"></div>
     <div class="cursor-light" aria-hidden="true"></div>
+    <div class="viewfinder-overlay" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <b>AF TRACKING</b>
+      <em>ISO 400 / F1.8 / 1-250</em>
+    </div>
 
     <section class="opening" aria-label="Opening viewfinder animation">
       <div class="aperture" aria-hidden="true">
@@ -63,20 +68,14 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal" aria-label="Animated camera lens illustration">
-          <div class="camera-hud hud-top">REC 00:00:08 / ISO 400 / F1.8</div>
-          <div class="camera-body">
-            <div class="camera-top"></div>
-            <div class="camera-lens">
-              <span class="lens-ring ring-one"></span>
-              <span class="lens-ring ring-two"></span>
-              <span class="lens-glass"></span>
-              <span class="lens-reflection"></span>
-            </div>
-            <div class="camera-viewfinder"></div>
-            <div class="camera-grip"></div>
+        <div class="hero-visual reveal" aria-label="Interactive 3D camera lens scene">
+          <canvas id="three-camera" class="webgl-scene" aria-hidden="true"></canvas>
+          <div class="scene-vignette" aria-hidden="true"></div>
+          <div class="scene-fallback" aria-hidden="true">
+            <span></span>
           </div>
-          <div class="camera-hud hud-bottom">AF-C / CAMPUS / 1-250</div>
+          <div class="camera-hud hud-top">WEBGL LIVE / REC 00:00:08</div>
+          <div class="camera-hud hud-bottom">DRAG THE LIGHT / SCROLL TO FOCUS</div>
         </div>
 
         <div class="floating-photo photo-a" data-depth="18"></div>
@@ -182,6 +181,7 @@
     </dialog>
 
     <script src="./data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
