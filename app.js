@@ -159,6 +159,22 @@
     });
   }
 
+  function initAnchorScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (event) => {
+        const target = document.querySelector(anchor.getAttribute("href"));
+        if (!target) {
+          return;
+        }
+        event.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY;
+        document.documentElement.scrollTop = top;
+        document.body.scrollTop = top;
+        history.replaceState(null, "", anchor.getAttribute("href"));
+      });
+    });
+  }
+
   function initThreeCameraScene() {
     const THREE = window.THREE;
     if (!threeCanvas || !THREE) {
@@ -404,6 +420,7 @@
   initPointer();
   initLightbox();
   initHeader();
+  initAnchorScroll();
 
   window.setTimeout(shutter, 1650);
   window.setTimeout(() => opening?.remove(), 4600);
