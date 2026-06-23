@@ -168,7 +168,7 @@ img {
 }
 
 .viewfinder-overlay em {
-  bottom: max(36px, 10vh);
+  bottom: 22px;
 }
 
 .opening {

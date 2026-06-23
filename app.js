@@ -175,6 +175,7 @@
       canvas: threeCanvas,
       antialias: true,
       alpha: true,
+      preserveDrawingBuffer: true,
       powerPreference: "high-performance"
     });
     renderer.setClearColor(0x000000, 0);
