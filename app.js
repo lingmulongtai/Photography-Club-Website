@@ -14,6 +14,8 @@
   const lightboxTitle = document.querySelector("#lightbox-title");
   const lightboxExif = document.querySelector("#lightbox-exif");
   const threeCanvas = document.querySelector("#three-camera");
+  const hudMode = document.querySelector("#hud-mode");
+  const hudExif = document.querySelector("#hud-exif");
 
   opening?.addEventListener("animationend", () => opening.remove(), { once: true });
   window.setTimeout(() => opening?.remove(), 4600);
@@ -163,40 +165,38 @@
   }
 
   function initAnchorScroll() {
-    let scrollAnimation = 0;
-    const animateTo = (targetTop) => {
-      window.cancelAnimationFrame(scrollAnimation);
-      const startTop = window.scrollY;
-      const distance = targetTop - startTop;
-      const duration = 760;
-      const startedAt = performance.now();
-      const ease = (t) => 1 - Math.pow(1 - t, 3);
-
-      const step = (now) => {
-        const progress = Math.min(1, (now - startedAt) / duration);
-        const nextTop = startTop + distance * ease(progress);
-        document.documentElement.scrollTop = nextTop;
-        document.body.scrollTop = nextTop;
-        if (progress < 1) {
-          scrollAnimation = window.requestAnimationFrame(step);
-        }
-      };
-
-      scrollAnimation = window.requestAnimationFrame(step);
-    };
-
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", (event) => {
+      anchor.addEventListener("click", () => {
         const target = document.querySelector(anchor.getAttribute("href"));
         if (!target) {
           return;
         }
-        event.preventDefault();
-        const top = target.getBoundingClientRect().top + window.scrollY;
-        animateTo(top);
-        history.replaceState(null, "", anchor.getAttribute("href"));
+        target.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
+        target.classList.add("is-visible");
       });
     });
+  }
+
+  function initCameraHud() {
+    const sections = document.querySelectorAll("[data-frame]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) {
+          return;
+        }
+
+        const section = visible.target;
+        hudMode.textContent = section.dataset.frame || "AF TRACKING";
+        hudExif.textContent = section.dataset.exif || "ISO 400 / F1.8 / 1-250";
+        document.body.dataset.frame = section.id || "hero";
+      },
+      { threshold: [0.18, 0.36, 0.58] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
   }
 
   function initThreeCameraScene() {
@@ -273,6 +273,18 @@
     grip.position.set(2.1, -0.1, 0.08);
     rig.add(grip);
 
+    const shutterButton = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.18, 42), edgeMaterial);
+    shutterButton.position.set(1.8, 1.35, 0.25);
+    rig.add(shutterButton);
+
+    const modeDial = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.28, 48), bodyMaterial);
+    modeDial.position.set(-2.02, 1.4, 0.1);
+    rig.add(modeDial);
+
+    const hotShoe = new THREE.Mesh(new THREE.BoxGeometry(0.84, 0.12, 0.52), edgeMaterial);
+    hotShoe.position.set(-0.58, 1.72, 0.12);
+    rig.add(hotShoe);
+
     const viewfinder = new THREE.Mesh(new THREE.BoxGeometry(0.92, 0.56, 0.16), glassMaterial);
     viewfinder.position.set(1.15, 0.56, 0.66);
     rig.add(viewfinder);
@@ -288,6 +300,15 @@
     const frontRing = new THREE.Mesh(new THREE.TorusGeometry(1.48, 0.1, 18, 112), bodyMaterial);
     frontRing.position.z = 0.98;
     lensGroup.add(frontRing);
+
+    for (let i = 0; i < 40; i += 1) {
+      const rib = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.2, 0.42), bodyMaterial);
+      const angle = (i / 40) * Math.PI * 2;
+      rib.position.set(Math.cos(angle) * 1.32, Math.sin(angle) * 1.32, 0.24);
+      rib.rotation.z = angle;
+      rib.rotation.y = Math.PI / 2;
+      lensGroup.add(rib);
+    }
 
     const focusRing = new THREE.Mesh(new THREE.TorusGeometry(1.16, 0.035, 12, 112), cyanMaterial);
     focusRing.position.z = 1.08;
@@ -306,9 +327,39 @@
     aperture.position.z = 1.23;
     lensGroup.add(aperture);
 
+    for (let i = 0; i < 7; i += 1) {
+      const bladeShape = new THREE.Shape();
+      bladeShape.moveTo(0, 0.08);
+      bladeShape.lineTo(0.74, 0.24);
+      bladeShape.lineTo(0.46, -0.18);
+      bladeShape.lineTo(0, -0.08);
+      bladeShape.lineTo(0, 0.08);
+      const blade = new THREE.Mesh(
+        new THREE.ShapeGeometry(bladeShape),
+        new THREE.MeshBasicMaterial({ color: 0x020304, transparent: true, opacity: 0.7, side: THREE.DoubleSide })
+      );
+      blade.position.z = 1.245;
+      blade.rotation.z = (i / 7) * Math.PI * 2 + 0.22;
+      lensGroup.add(blade);
+    }
+
     const flare = new THREE.Mesh(new THREE.RingGeometry(2.05, 2.08, 128), warmMaterial);
     flare.position.z = 1.3;
     lensGroup.add(flare);
+
+    const beam = new THREE.Mesh(
+      new THREE.ConeGeometry(2.65, 5.8, 96, 1, true),
+      new THREE.MeshBasicMaterial({
+        color: 0x67d8ff,
+        transparent: true,
+        opacity: 0.045,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      })
+    );
+    beam.rotation.x = Math.PI / 2;
+    beam.position.z = 3.55;
+    lensGroup.add(beam);
 
     const photoGroup = new THREE.Group();
     scene.add(photoGroup);
@@ -444,6 +495,7 @@
   initLightbox();
   initHeader();
   initAnchorScroll();
+  initCameraHud();
   initThreeCameraScene();
 
   window.setTimeout(shutter, 1650);

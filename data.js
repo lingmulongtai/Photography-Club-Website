@@ -7,7 +7,7 @@ window.KUAS_SITE_DATA = {
       tag: "OPEN",
       priority: true,
       type: "form",
-      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-07-da09f6f9.jpg"
     },
     {
       title: "Photo Walk Entry",
@@ -16,7 +16,7 @@ window.KUAS_SITE_DATA = {
       tag: "EVENT",
       priority: true,
       type: "form",
-      image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-02-9232c3e9.jpg"
     },
     {
       title: "Instagram",
@@ -25,7 +25,7 @@ window.KUAS_SITE_DATA = {
       tag: "SNS",
       priority: false,
       type: "social",
-      image: "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-04-a08a7ce3.jpg"
     },
     {
       title: "New Student Welcome",
@@ -34,7 +34,7 @@ window.KUAS_SITE_DATA = {
       tag: "LIVE",
       priority: false,
       type: "form",
-      image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-14-20cad4f1.jpg"
     },
     {
       title: "Photo Archive",
@@ -43,7 +43,7 @@ window.KUAS_SITE_DATA = {
       tag: "MEMBER",
       priority: false,
       type: "archive",
-      image: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-15-a39b24a5.jpg"
     },
     {
       title: "Contact",
@@ -52,34 +52,34 @@ window.KUAS_SITE_DATA = {
       tag: "MAIL",
       priority: false,
       type: "contact",
-      image: "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-22-f936e89c.jpg"
     }
   ],
   activities: [
     {
       title: "Photo Walk",
       description: "Kyoto, Osaka, campus, and hidden local spots.",
-      image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-02-9232c3e9.jpg"
     },
     {
       title: "Campus Shooting",
       description: "Everyday student life through a sharper lens.",
-      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-07-da09f6f9.jpg"
     },
     {
       title: "Portrait Shooting",
       description: "Lighting, direction, editing, and atmosphere.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-10-aeb04684.jpg"
     },
     {
       title: "Event Photography",
       description: "We capture open campus and student activities.",
-      image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-11-a4c84f47.jpg"
     },
     {
       title: "Gallery & Exhibition",
       description: "Online showcases and campus exhibitions.",
-      image: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=900&q=80"
+      image: "./assets/photo-15-a39b24a5.jpg"
     }
   ],
   gallery: [
@@ -87,49 +87,49 @@ window.KUAS_SITE_DATA = {
       title: "Campus Light",
       category: "Campus",
       exif: "ISO 200 / f2.8 / 1-500",
-      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80"
+      image: "./assets/photo-05-a5d51a9f.jpg"
     },
     {
       title: "Kyoto Evening",
       category: "Kyoto",
       exif: "ISO 640 / f1.8 / 1-125",
-      image: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1000&q=80"
+      image: "./assets/photo-23-83563d3c.jpg"
     },
     {
       title: "Portrait Study",
       category: "Portrait",
       exif: "ISO 400 / f2.0 / 1-250",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=80"
+      image: "./assets/photo-18-0ed23384.jpg"
     },
     {
       title: "Night Lines",
       category: "Night",
       exif: "ISO 1600 / f2.8 / 1-60",
-      image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1000&q=80"
+      image: "./assets/photo-16-2a4dccc5.jpg"
     },
     {
       title: "Event Frame",
       category: "Event",
       exif: "ISO 800 / f3.5 / 1-160",
-      image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=80"
+      image: "./assets/photo-12-bd8e2e14.jpg"
     },
     {
       title: "Travel Window",
       category: "Travel",
       exif: "ISO 100 / f5.6 / 1-1000",
-      image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1000&q=80"
+      image: "./assets/photo-08-2b3e5ccb.jpg"
     },
     {
       title: "Film Color",
       category: "Film Style",
       exif: "ISO 400 / f4.0 / 1-250",
-      image: "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format&fit=crop&w=1000&q=80"
+      image: "./assets/photo-03-d23f0907.jpg"
     },
     {
       title: "Quiet Street",
       category: "Kyoto",
       exif: "ISO 320 / f2.2 / 1-320",
-      image: "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?auto=format&fit=crop&w=1000&q=80"
+      image: "./assets/photo-20-5cfeaf9c.jpg"
     }
   ]
 };

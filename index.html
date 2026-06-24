@@ -8,7 +8,6 @@
       content="KUAS Photography Club official link hub and interactive landing page."
     />
     <title>KUAS Photography Club | Enter the Viewfinder</title>
-    <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -17,8 +16,8 @@
     <div class="cursor-light" aria-hidden="true"></div>
     <div class="viewfinder-overlay" aria-hidden="true">
       <span></span><span></span><span></span><span></span>
-      <b>AF TRACKING</b>
-      <em>ISO 400 / F1.8 / 1-250</em>
+      <b id="hud-mode">AF TRACKING</b>
+      <em id="hud-exif">ISO 400 / F1.8 / 1-250</em>
     </div>
 
     <section class="opening" aria-label="Opening viewfinder animation">
@@ -51,7 +50,7 @@
     </header>
 
     <main id="top">
-      <section class="hero section" aria-labelledby="hero-title">
+      <section class="hero section" aria-labelledby="hero-title" data-frame="VIEWFINDER" data-exif="ISO 400 / F1.8 / 1-250">
         <div class="hero-copy reveal">
           <p class="eyebrow">Enter the Viewfinder</p>
           <h1 id="hero-title">KUAS Photography Club</h1>
@@ -83,7 +82,7 @@
         <div class="floating-photo photo-c" data-depth="9"></div>
       </section>
 
-      <section id="links" class="section links-section" aria-labelledby="links-title">
+      <section id="links" class="section links-section" aria-labelledby="links-title" data-frame="LINK HUB / LIVE FORMS" data-exif="ISO 640 / F2.0 / 1-160">
         <div class="section-heading reveal">
           <p class="eyebrow">Link Hub</p>
           <h2 id="links-title">必要なリンクを、ここから。</h2>
@@ -94,7 +93,7 @@
         <div class="quick-links reveal" id="quick-links"></div>
       </section>
 
-      <section id="about" class="section about-section" aria-labelledby="about-title">
+      <section id="about" class="section about-section" aria-labelledby="about-title" data-frame="ABOUT / MANUAL FOCUS" data-exif="ISO 320 / F2.8 / 1-200">
         <div class="about-panel reveal">
           <p class="eyebrow">About</p>
           <h2 id="about-title">A creative community for visual storytelling.</h2>
@@ -115,7 +114,7 @@
         </div>
       </section>
 
-      <section class="section activities-section" aria-labelledby="activities-title">
+      <section id="activities" class="section activities-section" aria-labelledby="activities-title" data-frame="ACTIVITIES / BURST" data-exif="ISO 800 / F3.5 / 1-500">
         <div class="section-heading reveal">
           <p class="eyebrow">Activities</p>
           <h2 id="activities-title">Frames from campus life.</h2>
@@ -123,7 +122,7 @@
         <div class="activity-track reveal" id="activity-track" tabindex="0" aria-label="Featured activities"></div>
       </section>
 
-      <section id="gallery" class="section gallery-section" aria-labelledby="gallery-title">
+      <section id="gallery" class="section gallery-section" aria-labelledby="gallery-title" data-frame="GALLERY / CONTACT SHEET" data-exif="ISO 200 / F4.0 / 1-125">
         <div class="section-heading reveal">
           <p class="eyebrow">Interactive Gallery</p>
           <h2 id="gallery-title">Scroll, filter, open the frame.</h2>
@@ -133,7 +132,7 @@
         <div class="gallery-grid reveal" id="gallery-grid"></div>
       </section>
 
-      <section id="join" class="section join-section" aria-labelledby="join-title">
+      <section id="join" class="section join-section" aria-labelledby="join-title" data-frame="RECRUIT / OPEN CALL" data-exif="ISO 500 / F1.8 / 1-250">
         <div class="join-copy reveal">
           <p class="eyebrow">Recruitment</p>
           <h2 id="join-title">Join KUAS Photography Club</h2>
@@ -153,7 +152,7 @@
         </div>
       </section>
 
-      <section class="section forms-section" aria-labelledby="forms-title">
+      <section id="forms" class="section forms-section" aria-labelledby="forms-title" data-frame="FORMS / PRIORITY" data-exif="ISO 400 / F2.2 / 1-320">
         <div class="section-heading reveal">
           <p class="eyebrow">Forms & Important Links</p>
           <h2 id="forms-title">Current openings.</h2>
@@ -181,7 +180,7 @@
     </dialog>
 
     <script src="./data.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+    <script src="./three.min.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
