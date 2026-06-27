@@ -19,6 +19,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 92px;
 }
 
 body {
@@ -1348,7 +1349,9 @@ h2 {
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: clamp(1.65rem, 7.4vw, 1.85rem);
+    line-height: 1.08;
+    text-wrap: balance;
   }
 
   .hero-description,

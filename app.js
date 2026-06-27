@@ -1,5 +1,6 @@
 (function () {
   const data = window.KUAS_SITE_DATA;
+  let managedLinks = [];
   const root = document.documentElement;
   const flash = document.querySelector(".shutter-flash");
   const cursorLight = document.querySelector(".cursor-light");
@@ -25,15 +26,41 @@
     window.requestAnimationFrame(() => flash.classList.add("is-active"));
   };
 
+  async function loadLinks() {
+    const response = await fetch("./links.json", { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`links.json ${response.status}`);
+    }
+
+    const payload = await response.json();
+    managedLinks = Array.isArray(payload.links) ? payload.links : [];
+  }
+
+  function updateManagedLinkTargets() {
+    const joinLink = managedLinks.find((link) => link.id === "join") || managedLinks.find((link) => link.type === "form");
+    if (!joinLink) {
+      return;
+    }
+
+    document.querySelectorAll(".js-join-link").forEach((anchor) => {
+      anchor.href = joinLink.url;
+    });
+  }
+
   function renderLinks() {
-    quickLinks.innerHTML = data.links
+    if (!managedLinks.length) {
+      quickLinks.innerHTML = "";
+      return;
+    }
+
+    quickLinks.innerHTML = managedLinks
       .map(
         (link) => `
           <a class="link-card ${link.priority ? "priority" : ""}" style="--link-image: url('${link.image}')" href="${link.url}" target="_blank" rel="noreferrer">
             <span class="link-tag">${link.tag}</span>
             <strong>${link.title}</strong>
             <span>${link.description}</span>
-            <em>${link.type.toUpperCase()}</em>
+            <em>${String(link.type || "LINK").toUpperCase()}</em>
           </a>
         `
       )
@@ -61,7 +88,7 @@
   }
 
   function renderForms() {
-    const formLinks = data.links.filter((link) => link.type === "form" || link.type === "contact");
+    const formLinks = managedLinks.filter((link) => link.type === "form" || link.type === "contact");
     formsList.innerHTML = formLinks
       .map(
         (link) => `
@@ -206,6 +233,10 @@
     }
 
     const viewport = threeCanvas.parentElement;
+    const isCompact = window.matchMedia("(max-width: 700px)").matches;
+    const detail = isCompact
+      ? { pixelRatio: 1.15, photoCount: 3, particles: 120, ribs: 20, radialSegments: 56 }
+      : { pixelRatio: 1.55, photoCount: 5, particles: 240, ribs: 28, radialSegments: 80 };
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x030407, 0.055);
 
@@ -216,11 +247,10 @@
       canvas: threeCanvas,
       antialias: true,
       alpha: true,
-      preserveDrawingBuffer: true,
       powerPreference: "high-performance"
     });
     renderer.setClearColor(0x000000, 0);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, detail.pixelRatio));
     renderer.outputEncoding = THREE.sRGBEncoding;
     window.KUAS_WEBGL_CONTEXT = renderer.getContext();
     viewport.classList.add("is-webgl");
@@ -273,11 +303,11 @@
     grip.position.set(2.1, -0.1, 0.08);
     rig.add(grip);
 
-    const shutterButton = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.18, 42), edgeMaterial);
+    const shutterButton = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.18, 32), edgeMaterial);
     shutterButton.position.set(1.8, 1.35, 0.25);
     rig.add(shutterButton);
 
-    const modeDial = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.28, 48), bodyMaterial);
+    const modeDial = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.28, 36), bodyMaterial);
     modeDial.position.set(-2.02, 1.4, 0.1);
     rig.add(modeDial);
 
@@ -293,28 +323,28 @@
     lensGroup.position.set(-0.36, -0.05, 0.72);
     rig.add(lensGroup);
 
-    const lensBarrel = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.42, 1.78, 96, 1, false), edgeMaterial);
+    const lensBarrel = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.42, 1.78, detail.radialSegments, 1, false), edgeMaterial);
     lensBarrel.rotation.x = Math.PI / 2;
     lensGroup.add(lensBarrel);
 
-    const frontRing = new THREE.Mesh(new THREE.TorusGeometry(1.48, 0.1, 18, 112), bodyMaterial);
+    const frontRing = new THREE.Mesh(new THREE.TorusGeometry(1.48, 0.1, 14, detail.radialSegments), bodyMaterial);
     frontRing.position.z = 0.98;
     lensGroup.add(frontRing);
 
-    for (let i = 0; i < 40; i += 1) {
+    for (let i = 0; i < detail.ribs; i += 1) {
       const rib = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.2, 0.42), bodyMaterial);
-      const angle = (i / 40) * Math.PI * 2;
+      const angle = (i / detail.ribs) * Math.PI * 2;
       rib.position.set(Math.cos(angle) * 1.32, Math.sin(angle) * 1.32, 0.24);
       rib.rotation.z = angle;
       rib.rotation.y = Math.PI / 2;
       lensGroup.add(rib);
     }
 
-    const focusRing = new THREE.Mesh(new THREE.TorusGeometry(1.16, 0.035, 12, 112), cyanMaterial);
+    const focusRing = new THREE.Mesh(new THREE.TorusGeometry(1.16, 0.035, 10, detail.radialSegments), cyanMaterial);
     focusRing.position.z = 1.08;
     lensGroup.add(focusRing);
 
-    const innerGlass = new THREE.Mesh(new THREE.SphereGeometry(0.96, 64, 32), glassMaterial);
+    const innerGlass = new THREE.Mesh(new THREE.SphereGeometry(0.96, detail.radialSegments, 20), glassMaterial);
     innerGlass.scale.set(1, 1, 0.24);
     innerGlass.position.z = 1.1;
     lensGroup.add(innerGlass);
@@ -343,12 +373,12 @@
       lensGroup.add(blade);
     }
 
-    const flare = new THREE.Mesh(new THREE.RingGeometry(2.05, 2.08, 128), warmMaterial);
+    const flare = new THREE.Mesh(new THREE.RingGeometry(2.05, 2.08, detail.radialSegments), warmMaterial);
     flare.position.z = 1.3;
     lensGroup.add(flare);
 
     const beam = new THREE.Mesh(
-      new THREE.ConeGeometry(2.65, 5.8, 96, 1, true),
+      new THREE.ConeGeometry(2.65, 5.8, detail.radialSegments, 1, true),
       new THREE.MeshBasicMaterial({
         color: 0x67d8ff,
         transparent: true,
@@ -366,7 +396,7 @@
     const loader = new THREE.TextureLoader();
     loader.crossOrigin = "anonymous";
 
-    data.gallery.slice(0, 7).forEach((item, index) => {
+    data.gallery.slice(0, detail.photoCount).forEach((item, index) => {
       const texture = loader.load(item.image);
       texture.encoding = THREE.sRGBEncoding;
       const frame = new THREE.Mesh(
@@ -383,7 +413,7 @@
       );
 
       const card = new THREE.Group();
-      const angle = (index / 7) * Math.PI * 2;
+      const angle = (index / detail.photoCount) * Math.PI * 2;
       const radius = 4.4 + (index % 2) * 0.78;
       card.position.set(Math.cos(angle) * radius, -0.35 + (index % 3) * 0.88, -2.2 + Math.sin(angle) * 2.7);
       card.rotation.set((index % 2 ? 0.08 : -0.08), -angle + Math.PI / 2, (index - 3) * 0.045);
@@ -399,7 +429,7 @@
       photoGroup.add(card);
     });
 
-    const particlesCount = 420;
+    const particlesCount = detail.particles;
     const positions = new Float32Array(particlesCount * 3);
     for (let i = 0; i < particlesCount; i += 1) {
       positions[i * 3] = (Math.random() - 0.5) * 18;
@@ -485,18 +515,45 @@
     animate();
   }
 
-  renderLinks();
-  renderActivities();
-  renderForms();
-  renderFilters();
-  renderGallery();
-  initReveal();
-  initPointer();
-  initLightbox();
-  initHeader();
-  initAnchorScroll();
-  initCameraHud();
-  initThreeCameraScene();
+  async function init() {
+    let linksLoaded = false;
+    try {
+      await loadLinks();
+      linksLoaded = true;
+    } catch (error) {
+      quickLinks.innerHTML = `
+        <div class="link-card priority link-error">
+          <span class="link-tag">ERROR</span>
+          <strong>links.json could not be loaded</strong>
+          <span>サーバー経由で開くか、links.json の配置を確認してください。</span>
+          <em>CONFIG</em>
+        </div>
+      `;
+      console.error(error);
+    }
 
-  window.setTimeout(shutter, 1650);
+    if (linksLoaded) {
+      updateManagedLinkTargets();
+      renderLinks();
+    }
+
+    renderActivities();
+    if (linksLoaded) {
+      renderForms();
+    }
+
+    renderFilters();
+    renderGallery();
+    initReveal();
+    initPointer();
+    initLightbox();
+    initHeader();
+    initAnchorScroll();
+    initCameraHud();
+    window.setTimeout(initThreeCameraScene, 320);
+
+    window.setTimeout(shutter, 1650);
+  }
+
+  init();
 })();
